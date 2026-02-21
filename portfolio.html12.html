@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAILASH · makers hub</title>
+    <!-- Font Awesome 6 (free) for extreme icons & animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at 30% 10%, #0b0f1c, #02040c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* extreme animated orbs + particles */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(100, 200, 255, 0.15);
+            filter: blur(65px);
+            z-index: 0;
+            animation: floatBlob 14s infinite alternate ease-in-out;
+        }
+
+        .orb1 { width: 350px; height: 350px; top: -100px; left: -100px; background: #5f2b8c; opacity: 0.4; }
+        .orb2 { width: 500px; height: 500px; bottom: -200px; right: -100px; background: #1e5f74; opacity: 0.25; animation-duration: 20s; }
+        .orb3 { width: 280px; height: 280px; top: 40%; left: 60%; background: #963c6b; opacity: 0.3; filter: blur(90px); animation: floatBlob2 18s infinite; }
+
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(80px, 60px) scale(1.3); }
+        }
+        @keyframes floatBlob2 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-90px, 30px) scale(1.2); }
+        }
+
+        /* particles micro dots (extreme detail) */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(rgba(255, 215, 100, 0.3) 1px, transparent 1px),
+                radial-gradient(rgba(150, 230, 255, 0.2) 1px, transparent 1px);
+            background-size: 70px 70px, 110px 110px;
+            background-position: 0 0, 30px 30px;
+            pointer-events: none;
+            z-index: 1;
+            animation: driftParticles 40s linear infinite;
+        }
+
+        @keyframes driftParticles {
+            0% { background-position: 0 0, 30px 30px; }
+            100% { background-position: 200px 200px, 300px 150px; }
+        }
+
+        /* main card — extreme glass + animation */
+        .hub {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(15, 25, 35, 0.5);
+            backdrop-filter: blur(14px) saturate(200%);
+            -webkit-backdrop-filter: blur(14px) saturate(200%);
+            border: 1px solid rgba(120, 200, 255, 0.25);
+            border-radius: 4rem 2rem 4rem 2rem;
+            box-shadow: 0 35px 85px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 255, 255, 0.1) inset, 0 0 30px rgba(0, 180, 255, 0.3);
+            padding: 3rem 2.5rem;
+            transition: box-shadow 0.3s, border-color 0.3s;
+            animation: borderPulse 5s infinite alternate;
+        }
+
+        .hub:hover {
+            box-shadow: 0 40px 100px rgba(0, 200, 255, 0.4), 0 0 0 2px rgba(0, 255, 200, 0.4) inset;
+            border-color: rgba(0, 255, 200, 0.6);
+        }
+
+        @keyframes borderPulse {
+            0% { border-radius: 4rem 2rem 4rem 2rem; border-color: rgba(0, 255, 255, 0.2); }
+            50% { border-radius: 3rem 5rem 3rem 5rem; border-color: rgba(200, 100, 255, 0.4); }
+            100% { border-radius: 5rem 3rem 5rem 3rem; border-color: rgba(0, 200, 255, 0.7); }
+        }
+
+        /* header section — extreme flex with glitch */
+        .maker-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.8rem 1rem;
+            margin-bottom: 3rem;
+            border-bottom: 2px dashed rgba(255, 255, 255, 0.15);
+            padding-bottom: 2rem;
+        }
+
+        .identity {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .name-glow {
+            font-size: 3.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fffac2, #b5ffff, #f5b0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px cyan, 0 0 45px magenta;
+            letter-spacing: 4px;
+            animation: glitchText 1.8s infinite alternate;
+            position: relative;
+        }
+
+        .name-glow::before, .name-glow::after {
+            content: "KAILASH";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.4;
+        }
+
+        .name-glow::before {
+            color: #ff00c3;
+            z-index: -1;
+            transform: translate(-2px, -2px);
+            animation: glitchMove 3s infinite;
+        }
+
+        .name-glow::after {
+            color: #00ffff;
+            z-index: -2;
+            transform: translate(3px, 2px);
+            animation: glitchMove 2.5s infinite reverse;
+        }
+
+        @keyframes glitchText {
+            0% { text-shadow: 3px 0 magenta, -3px 0 cyan; }
+            25% { text-shadow: -5px 2px magenta, 5px -2px cyan; }
+            50% { text-shadow: 4px -1px lime, -4px 1px yellow; }
+            75% { text-shadow: -2px 3px red, 2px -3px blue; }
+            100% { text-shadow: 6px 2px cyan, -6px -2px magenta; }
+        }
+
+        @keyframes glitchMove {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 2px); }
+            40% { transform: translate(3px, -2px); }
+            60% { transform: translate(-2px, -1px); }
+            80% { transform: translate(1px, 3px); }
+            100% { transform: translate(0); }
+        }
+
+        /* contact pills with extreme icons */
+        .contact-pulse {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.3rem;
+            align-items: center;
+        }
+
+        .contact-item {
+            background: rgba(10, 20, 30, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            padding: 0.9rem 1.8rem;
+            border-radius: 60px;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: rgba(230, 255, 250, 0.95);
+            box-shadow: 0 0 20px rgba(0, 200, 255, 0.3);
+            transition: 0.2s scale, 0.2s background, 0.2s box-shadow;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: wobblePill 4s infinite;
+        }
+
+        .contact-item:nth-child(2) { animation-delay: 0.5s; }
+        .contact-item:nth-child(3) { animation-delay: 1s; }
+
+        .contact-item i {
+            font-size: 1.9rem;
+            color: #00f7ff;
+            filter: drop-shadow(0 0 8px magenta);
+            animation: rotateIcon 5s infinite linear;
+        }
+
+        .contact-item:hover {
+            scale: 1.1;
+            background: #112233;
+            box-shadow: 0 0 35px cyan;
+            border-color: magenta;
+        }
+
+        @keyframes wobblePill {
+            0%,100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(0.5deg); }
+            75% { transform: translateY(3px) rotate(-0.5deg); }
+        }
+
+        @keyframes rotateIcon {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* specs section title */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 3.5rem 0 2.2rem 0;
+        }
+
+        .section-title h2 {
+            font-size: 2.6rem;
+            font-weight: 400;
+            background: linear-gradient(145deg, #ffcf8a, #ffa7b9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px hotpink;
+            letter-spacing: 2px;
+        }
+
+        .section-title i {
+            font-size: 3rem;
+            color: gold;
+            animation: spin3d 6s infinite ease;
+        }
+
+        @keyframes spin3d {
+            0% { transform: perspective(400px) rotateY(0deg); }
+            50% { transform: perspective(400px) rotateY(180deg); color: cyan; }
+            100% { transform: perspective(400px) rotateY(360deg); color: magenta; }
+        }
+
+        /* ICON GRID — extreme specifications & animations */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .res-card {
+            background: rgba(0, 15, 25, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 255, 255, 0.25);
+            border-radius: 2.5rem 1rem 2.5rem 1rem;
+            padding: 2rem 1.2rem;
+            text-align: center;
+            color: white;
+            transition: all 0.25s;
+            box-shadow: 0 15px 30px -12px rgba(0,0,0,0.6);
+            animation: cardFloating 5s infinite alternate;
+            transform-origin: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .res-card:nth-child(odd) { animation-delay: 0.2s; }
+        .res-card:nth-child(3) { animation-delay: 0.7s; }
+        .res-card:nth-child(5) { animation-delay: 1.2s; }
+
+        @keyframes cardFloating {
+            0% { transform: translateY(0px) rotate(0deg); border-radius: 2.5rem 1rem 2.5rem 1rem; }
+            100% { transform: translateY(-20px) rotate(1deg); border-radius: 1.5rem 2.5rem 1.5rem 2.5rem; background: rgba(10, 30, 45, 0.7); border-color: rgba(255, 0, 255, 0.6); }
+        }
+
+        .res-card:hover {
+            scale: 1.07;
+            border-color: cyan;
+            box-shadow: 0 0 45px magenta, 0 10px 25px #000;
+            backdrop-filter: blur(20px);
+        }
+
+        .res-card i {
+            font-size: 4rem;
+            filter: drop-shadow(0 0 15px cyan);
+            transition: 0.2s;
+        }
+
+        .res-card:hover i {
+            filter: drop-shadow(0 0 35px gold) drop-shadow(0 0 15px magenta);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .res-card h3 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            background: linear-gradient(145deg, #fff, #c7e9ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .spec-badge {
+            background: rgba(0, 255, 255, 0.15);
+            border-radius: 60px;
+            padding: 0.4rem 1rem;
+            width: fit-content;
+            margin: 0 auto;
+            border: 1px solid aqua;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #bbfffc;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .spec-badge i {
+            font-size: 1.2rem;
+            color: gold;
+        }
+
+        /* specific icon colors for more specs */
+        .res-card:nth-child(1) i { color: #ffb347; text-shadow: 0 0 25px orange; }
+        .res-card:nth-child(2) i { color: #6affb5; text-shadow: 0 0 25px springgreen; }
+        .res-card:nth-child(3) i { color: #ff6ff0; text-shadow: 0 0 25px deeppink; }
+        .res-card:nth-child(4) i { color: #50c8ff; text-shadow: 0 0 25px dodgerblue; }
+        .res-card:nth-child(5) i { color: #f5d742; text-shadow: 0 0 25px yellow; }
+        .res-card:nth-child(6) i { color: #b883ff; text-shadow: 0 0 258px purple; }
+        .res-card:nth-child(7) i { color: #ff8c8c; text-shadow: 0 0 25px tomato; }
+        .res-card:nth-child(8) i { color: #6ef0b0; text-shadow: 0 0 25px mediumspringgreen; }
+
+        /* footer extra blink */
+        .foot-note {
+            margin-top: 4rem;
+            display: flex;
+            justify-content: flex-end;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.5);
+            border-top: 1px dashed rgba(255,255,255,0.2);
+            padding-top: 2rem;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .foot-note i {
+            color: cyan;
+            font-size: 1.8rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%,100%{ transform: translateY(0); }
+            50%{ transform: translateY(-10px); color: magenta; }
+        }
+
+        /* responsive */
+        @media (max-width: 700px) {
+            .hub { padding: 2rem 1.2rem; }
+            .name-glow { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- animated background blobs -->
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    <div class="particles"></div>
+
+    <main class="hub">
+        <!-- header: name + mail + contact (extreme) -->
+        <div class="maker-header">
+            <div class="identity">
+                <div class="name-glow">KAILASH</div>
+            </div>
+            <div class="contact-pulse">
+                <!-- mail id with icon -->
+                <div class="contact-item">
+                    <i class="fas fa-envelope fa-spin" style="--fa-animation-duration: 3s;"></i>
+                    <span>palreddykailash@gmail.com</span>
+                    <i class="fas fa-circle-check" style="color: #00ffc3; font-size: 1.4rem;"></i>
+                </div>
+                <!-- contact no with icon -->
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt fa-shake"></i>
+                    <span>9347926455</span>
+                    <i class="fas fa-bolt" style="color: gold;"></i>
+                </div>
+                <!-- extra cosmic badge -->
+                <div class="contact-item">
+                    <i class="fas fa-crown fa-spin"></i>
+                    <span>MAKER</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- tagline extreme -->
+        <div style="margin: 2rem 0 1rem;">
+            <span style="font-size: 1.6rem; background: rgba(0,0,0,0.4); padding: 0.4rem 2rem; border-radius: 60px; border-left: 5px solid magenta; border-right: 5px solid cyan; color: white; font-weight: 300; letter-spacing: 3px;">
+                <i class="fas fa-cubes"></i> RESOURCES HUB FOR MAKERS <i class="fas fa-microchip"></i>
+            </span>
+        </div>
+
+        <!-- section: more icons with specifications (extreme) -->
+        <div class="section-title">
+            <i class="fas fa-gear"></i>
+            <h2>⚡ maker spec · icon collection ⚡</h2>
+            <i class="fas fa-gear"></i>
+        </div>
+
+        <div class="resource-grid">
+            <!-- card 1 : 3D printer with specs -->
+            <div class="res-card">
+                <i class="fas fa-cube"></i>
+                <h3>PRINT labs</h3>
+                <div class="spec-badge"><i class="fas fa-ruler"></i> 0.1mm · 300x300</div>
+                <div class="spec-badge"><i class="fas fa-fire"></i> 280°C hotend</div>
+                <i class="fas fa-sd-card" style="font-size: 1.5rem; margin-top: 8px;"></i>
+            </div>
+            <!-- card 2 : laser cutter/engraver -->
+            <div class="res-card">
+                <i class="fas fa-bolt"></i>
+                <h3>LASER forge</h3>
+                <div class="spec-badge"><i class="fas fa-expand"></i> 600x400mm</div>
+                <div class="spec-badge"><i class="fas fa-gauge-high"></i> 20W diode</div>
+                <i class="fas fa-fan" style="font-size: 1.5rem;"></i>
+            </div>
+            <!-- card 3 : cnc router -->
+            <div class="res-card">
+                <i class="fas fa-industry"></i>
+                <h3>CNC router</h3>
+                <div class="spec-badge"><i class="fas fa-weight-hanging"></i> 2.2kW spindle</div>
+                <div class="spec-badge"><i class="fas fa-arrows-up-down"></i> 750x750mm</div>
+                <i class="fas fa-gripfire"></i>
+            </div>
+            <!-- card 4 : electronics workstation -->
+            <div class="res-card">
+                <i class="fas fa-microchip"></i>
+                <h3>ELECTRO lab</h3>
+                <div class="spec-badge"><i class="fas fa-wave-square"></i> 100MHz scope</div>
+                <div class="spec-badge"><i class="fas fa-solder"></i> reflow station</div>
+                <i class="fas fa-battery-full"></i>
+            </div>
+            <!-- card 5 : hand tools / maker essentials -->
+            <div class="res-card">
+                <i class="fas fa-toolbox"></i>
+                <h3>TOOL wall</h3>
+                <div class="spec-badge"><i class="fas fa-wrench"></i> 120pcs metric</div>
+                <div class="spec-badge"><i class="fas fa-compress"></i> precision set</div>
+                <i class="fas fa-hammer"></i>
+            </div>
+            <!-- card 6 : material library -->
+            <div class="res-card">
+                <i class="fas fa-layer-group"></i>
+                <h3>MATERIALS</h3>
+                <div class="spec-badge"><i class="fas fa-robot"></i> PLA / ABS / PETG</div>
+                <div class="spec-badge"><i class="fas fa-palette"></i> plywood · acrylic</div>
+                <i class="fas fa-tree"></i>
+            </div>
+            <!-- card 7 : arduino / raspberry pi -->
+            <div class="res-card">
+                <i class="fab fa-raspberry-pi"></i>
+                <h3>PI · ARDUINO</h3>
+                <div class="spec-badge"><i class="fas fa-memory"></i> 8GB ram</div>
+                <div class="spec-badge"><i class="fas fa-wifi"></i> BLE · LoRa</div>
+                <i class="fas fa-ethernet"></i>
+            </div>
+            <!-- card 8 : sensors & modules extra -->
+            <div class="res-card">
+                <i class="fas fa-temperature-high"></i>
+                <h3>SENSOR hub</h3>
+                <div class="spec-badge"><i class="fas fa-cloud-sun"></i> 12 DOF IMU</div>
+                <div class="spec-badge"><i class="fas fa-laser"></i> TOF · LIDAR</div>
+                <i class="fas fa-eye"></i>
+            </div>
+        </div>
+
+        <!-- second row of extreme spec icons (more icons) -->
+        <div style="margin: 3rem 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem;">
+            <span style="display: flex; align-items: center; gap: 12px; background: rgba(0,20,40,0.6); padding: 1rem 2rem; border-radius: 60px; border: 1px solid lime;">
+                <i class="fas fa-satellite-dish fa-spin"></i> <span style="color: white;">RF com · 2.4GHz</span> <i class="fas fa-signal" style="color:cyan"></i>
+            </span>
+            <span style="display: flex; align-items: center; gap: 12px; background: rgba(40,0,40,0.7); padding: 1rem 2.2rem; border-radius: 60px; border: 1px solid magenta;">
+                <i class="fas fa-vr-cardboard fa-beat"></i> <span style="color: white;">AR/VR kit · 120Hz</span> <i class="fas fa-camera-retro" style="color: gold"></i>
+            </span>
+            <span style="display: flex; align-items: center; gap: 12px; background: rgba(0,40,40,0.7); padding: 1rem 2.2rem; border-radius: 60px; border: 1px solid cyan;">
+                <i class="fas fa-robot fa-bounce"></i> <span style="color: white;">ROS2 · manipulator</span> <i class="fas fa-gears" style="color:lightgreen"></i>
+            </span>
+        </div>
+
+        <!-- footer with extreme reprint of contact (icon overload) -->
+        <div class="foot-note">
+            <i class="fas fa-star"></i>
+            <span>⚡ KAILASH · palreddykailash@gmail.com · 9347926455 ⚡</span>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-bolt" style="color: gold; animation: bounce 1s infinite;"></i>
+            <i class="fas fa-infinity" style="color: turquoise;"></i>
+        </div>
+    </main>
+</body>
+</html>
